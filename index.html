@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <!-- Botão de alternância de tema (dark / light)
+             o texto visível foi removido; um pseudo-elemento (::after) mostra o ícone
+             e um span .visually-hidden mantem a label para leitores de tela -->
+        <div class="site-header__inner">
+            <button id="theme-toggle" aria-pressed="false" aria-label="Alternar tema">
+                <span class="visually-hidden">Alternar tema</span>
+            </button>
+        </div>
+    </header>
+    <main>
+        <h1>Quem está assistindo?</h1>
+        <section aria-label="Perfis disponíveis">
+            <ul class="profiles" role="list">
+                <li class="profiles__item">
+                    <a href="catalogo/catalogo.html" class="profile">
+                        <figure>
+                            <img src="assets/perfil-1.jpg" alt="Ilustração de um personagem melancólico e pálido em estilo vitoriano sombrio, com estética de stop-motion e elementos distorcidos ao fundo.">
+                            <figcaption>Ricardo</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profiles__item">
+                    <a href="catalogo/catalogo.html" class="profile">
+                        <figure>
+                            <img src="assets/perfil-2.jpg" alt="Imagem de um boné azul">
+                            <figcaption>Blue</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profiles__item">
+                    <a href="catalogo/catalogo.html" class="profile">
+                        <figure>
+                            <img src="assets/perfil-3.jpg" alt="Imagem de um personagem com boné">
+                            <figcaption>Ação</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profiles__item">
+                    <a href="catalogo/catalogo.html" class="profile">
+                        <figure>
+                            <img src="assets/perfil-4.jpg" alt="Imagem de um personagem com boné azul">
+                            <figcaption>Inicórnio</figcaption>
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+    </footer>
+    <script src="js/index.js"></script>
+</body>
+</html>

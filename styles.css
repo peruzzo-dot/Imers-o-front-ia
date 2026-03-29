@@ -1,0 +1,401 @@
+:root {
+    /* variáveis de tema: cores e tokens reutilizáveis */
+    --bg-1: #000000;
+    /* cor de fundo superior */
+    --bg-2: #0a0a0a;
+    /* cor de fundo inferior */
+    --card: #f80000;
+    /* cor de destaque (não usada em todos os lugares) */
+    --text: #f3efef;
+    /* cor principal do texto */
+    --muted: #f5f0f0;
+    /* cor para textos secundários */
+    --focus-ring: rgba(90, 0, 5, 0.14);
+    /* cor usada para anel de foco */
+}
+
+/* Reset básico: faz com que o box-sizing seja consistente */
+* {
+    box-sizing: border-box
+}
+
+/* inclui padding/border dentro da largura/altura */
+html,
+body {
+    height: 100%
+}
+
+/* garante que 100% de altura funcione corretamente */
+
+body {
+    margin: 0;
+    /* remove margens padrão do navegador */
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    /* fonte padrão da página */
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    /* gradiente de fundo */
+    color: var(--text);
+    /* cor do texto principal */
+    -webkit-font-smoothing: antialiased;
+    /* suaviza fontes em WebKit */
+    -moz-osx-font-smoothing: grayscale;
+    /* suaviza fontes no macOS */
+    display: flex;
+    /* layout flex para centralizar conteúdo verticalmente se necessário */
+    flex-direction: column;
+    /* empilha elementos na vertical */
+    align-items: center;
+    /* centraliza conteúdo horizontalmente */
+    transition: background .28s ease, color .28s ease; /* transição suave entre temas */
+}
+
+main {
+    width: 100%;
+    /* ocupa a largura disponível */
+    max-width: 1100px;
+    /* limita a largura máxima para legibilidade */
+    padding: 48px 24px 24px;
+    /* espaçamento interno (topo, laterais, base) */
+    display: flex;
+    /* usa flex para organizar conteúdo interno */
+    flex-direction: column;
+    /* empilha elementos verticalmente */
+    align-items: center;
+    /* centraliza itens horizontalmente */
+}
+
+h1 {
+    margin: 0;
+    /* remove margem padrão */
+    font-weight: 700;
+    /* peso da fonte mais grosso */
+    font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+    /* tamanho responsivo entre limites */
+    letter-spacing: -0.02em;
+    /* pequeno ajuste de espaçamento entre letras */
+    text-align: center;
+    /* alinha o título ao centro */
+    color: var(--text);
+    /* cor do título */
+}
+
+/* Subtle red underline to evoke brand */
+h1::after {
+    content: "";
+    /* cria um elemento decorativo depois do h1 */
+    display: block;
+    /* faz a pseudo-elem ocupar linha separada */
+    width: 72px;
+    /* largura da barra vermelha */
+    height: 6px;
+    /* altura da barra vermelha */
+    background: var(--card);
+    /* usa a cor de destaque definida */
+    margin: 12px auto 0;
+    /* espaçamento e centralização horizontal */
+    border-radius: 4px;
+    /* cantos arredondados da barra */
+    opacity: 0.95;
+    /* ligeira transparência */
+}
+
+/* Contêiner dos perfis */
+.profiles {
+    width: 100%;
+    /* ocupa toda a largura do pai */
+    margin-top: 28px;
+    /* separação do título */
+    display: flex;
+    /* coloca os perfis lado a lado */
+    flex-wrap: wrap;
+    /* permite quebra em múltiplas linhas */
+    justify-content: center;
+    /* centraliza os itens horizontalmente */
+    gap: clamp(12px, 3vw, 28px);
+    /* espaçamento responsivo entre itens */
+    align-items: flex-start;
+    /* alinha itens no topo da linha */
+}
+
+.profiles__item {
+    display: flex;
+    /* usado para centrar conteúdo interno se necessário */
+    justify-content: center;
+    /* centra horizontalmente o conteúdo do item */
+}
+
+/* Estilo base para cada perfil (link ou botão) */
+.profile {
+    display: inline-block;
+    /* trata o perfil como bloco inline (para larguras) */
+    width: 100%;
+    /* permite que o elemento cresça até o limite do pai */
+    max-width: 220px;
+    /* limite máximo de largura para cada card */
+    background: transparent;
+    /* sem fundo por padrão */
+    border-radius: 10px;
+    /* cantos arredondados para suavizar o card */
+    text-align: center;
+    /* centraliza o texto dentro do card */
+    color: inherit;
+    /* herda a cor do texto do elemento pai */
+    text-decoration: none;
+    /* remove sublinhado de links */
+    transition: transform .18s cubic-bezier(.2, .9, .3, 1), box-shadow .18s;
+    /* anima transformações e sombras */
+    -webkit-tap-highlight-color: transparent;
+    /* remove highlight em dispositivos touch */
+    flex: 0 0 160px;
+    /* flex-basis: largura base fixa para layout lado a lado */
+}
+
+.profile figure {
+    margin: 0
+}
+
+/* remove margem padrão do figure */
+
+/* Imagem do perfil: forçada a proporção quadrada */
+.profile img {
+    width: 100%;
+    /* ocupa a largura do elemento pai */
+    aspect-ratio: 1/1;
+    /* força proporção 1:1 (quadrado) */
+    object-fit: cover;
+    /* cobre a área cortando partes externas, preservando proporção */
+    display: block;
+    /* remove espaço em linhas abaixo da imagem */
+    border-radius: 8px;
+    /* cantos arredondados da imagem */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+    /* sombra para dar profundidade */
+    transition: transform .22s ease, box-shadow .22s ease;
+    /* anima transformações e sombra */
+}
+
+.profile figcaption {
+    margin-top: 12px;
+    /* espaçamento entre imagem e legenda */
+    font-size: 0.95rem;
+    /* tamanho do texto da legenda */
+    color: var(--muted);
+    /* cor menos proeminente para a legenda */
+}
+
+/* Estado hover/focus: eleva e destaca a imagem */
+.profile:hover img,
+.profile:focus img {
+    transform: translateY(-6px) scale(1.03);
+    /* levanta e amplia levemente a imagem */
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 0 6px var(--focus-ring);
+    /* sombra mais forte + anel sutil */
+}
+
+/* Accessible focus ring: remove outline padrão e usa box-shadow no focus-visible */
+.profile:focus {
+    outline: none;
+    /* remove outline padrão do navegador */
+}
+
+.profile:focus-visible {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 0 6px var(--focus-ring);
+    /* anel visível para navegação por teclado */
+    border-radius: 12px;
+    /* garante os cantos arredondados no estado de foco */
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width:420px) {
+
+    /* Em telas pequenas, reduz a largura dos cards e permite 2 por linha */
+    .profile {
+        max-width: 160px;
+        flex: 0 0 45%;
+    }
+
+    /* reduz o card e permite 2 por linha */
+}
+
+/* Breakpoints para diferentes tipos de devices: mobile, tablet, desktop e widescreen */
+
+/* Mobile médio: entre telefones pequenos e tablets (≈421px - 767px) */
+@media (min-width:421px) and (max-width:767px) {
+
+    /* Ajusta padding para telas um pouco maiores */
+    main {
+        padding: 40px 20px 20px;
+    }
+
+    /* reduz um pouco o padding lateral */
+    /* Aproximadamente 3 cards por linha (dependendo do gap) */
+    .profile {
+        flex: 0 0 30%;
+        max-width: 170px;
+    }
+
+    /* flex-basis cerca de 30% */
+    h1 {
+        font-size: clamp(1.6rem, 3.1vw, 2.2rem);
+    }
+
+    /* tamanho do título levemente ajustado */
+}
+
+/* Tablet: dispositivos médios (≈768px - 899px) */
+@media (min-width:768px) and (max-width:899px) {
+    main {
+        padding: 44px 24px 24px;
+    }
+
+    /* padding confortável para tablets */
+    .profile {
+        flex: 0 0 150px;
+        max-width: 180px;
+    }
+
+    /* 4 por linha aproximado */
+    h1 {
+        font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    }
+
+    /* título um pouco maior */
+}
+
+/* Desktop padrão: a partir de 900px — layout de colunas mais amplas */
+@media (min-width:900px) {
+    .profile {
+        flex: 0 0 180px;
+        max-width: 200px;
+    }
+
+    /* em desktops, cards maiores */
+    main {
+        max-width: 1300px;
+    }
+
+    /* permite conteúdo mais largo em desktop */
+    h1 {
+        font-size: clamp(2rem, 2.2vw, 2.8rem);
+    }
+
+    /* aumenta título em telas maiores */
+}
+
+/* Widescreen / telas muito grandes: 1440px+ */
+@media (min-width:1440px) {
+    .profile {
+        flex: 0 0 200px;
+        max-width: 220px;
+    }
+
+    /* cards ainda maiores em telas largas */
+    main {
+        max-width: 1400px;
+        padding: 64px 32px 32px;
+    }
+
+    /* mais espaço ao redor */
+    h1 {
+        font-size: clamp(2.4rem, 1.8vw, 3.4rem);
+    }
+
+    /* título mais impactante */
+}
+
+footer {
+    margin: 32px 0 56px;
+    /* espaçamento do rodapé (topo, laterais, base) */
+    color: var(--muted);
+    /* cor mais suave para texto do rodapé */
+    font-size: 0.85rem;
+    /* tamanho do texto do rodapé */
+}
+
+/* Respeita preferências de movimento reduzido do usuário */
+@media (prefers-reduced-motion: reduce) {
+
+    .profile,
+    .profile img {
+        transition: none
+    }
+
+    /* desliga transições para usuários que preferem menos movimento */
+}
+
+/* Helper: esconde visualmente conteúdo, mas mantém acessível para leitores de tela */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap
+}
+
+/* Estilos para o header e botão de alternância de tema */
+.site-header{
+    width:100%;
+    display:flex;
+    justify-content:flex-end; /* botão à direita */
+    padding:12px 24px; /* espaçamento do header */
+}
+.site-header__inner{max-width:1100px;width:100%;display:flex;justify-content:flex-end}
+#theme-toggle{
+    background:transparent; /* sem fundo para combinar com o layout escuro */
+    color:var(--text); /* usa cor do texto atual */
+    border:1px solid rgba(255,255,255,0.06); /* borda sutil */
+    padding:8px 12px; /* espaçamento interno do botão */
+    border-radius:8px; /* cantos arredondados */
+    cursor:pointer; /* ponteiro de clique */
+    font-size:1.05rem; /* tamanho do ícone/emoji */
+}
+#theme-toggle:focus{outline:none}
+#theme-toggle:focus-visible{
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 0 6px var(--focus-ring); /* foco acessível */
+}
+
+/* Tema claro: sobrescreve variáveis para um visual light */
+/* Usa o atributo data-theme no elemento root (<html>) */
+:root[data-theme='light'], [data-theme='light']{
+    --bg-1: #fafafa; /* fundo superior claro */
+    --bg-2: #ffffff; /* fundo inferior ainda mais claro */
+    --card: #e50914; /* mantemos o accent vermelho */
+    --text: #111111; /* texto escuro para contraste */
+    --muted: #4a4a4a; /* texto secundário escuro */
+    --focus-ring: rgba(14, 123, 255, 0.14); /* anel de foco azul suave no modo claro */
+}
+
+/* Ajustes visuais menores para modo claro */
+[data-theme='light'] #theme-toggle{
+    border:1px solid rgba(0,0,0,0.08); /* borda mais visível em claro */
+}
+
+[data-theme='light'] .profile img{
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12); /* sombra mais suave em tema claro */
+}
+
+/* Mostrar o ícone do tema apenas via pseudo-elemento (sem texto visível) */
+#theme-toggle{
+    position:relative;
+    /* z-index não necessário, mas mantemos posicionamento para pseudo-elemento */
+}
+#theme-toggle::after{
+    content:'🌙'; /* ícone padrão (assumimos dark por default) */
+    display:inline-block;
+    font-size:1.05rem; /* tamanho visual do ícone */
+    line-height:1;
+    transition: transform .18s ease, opacity .18s ease;
+}
+/* Quando o root (<html>) tiver data-theme='light', usamos o ícone de sol */
+html[data-theme='light'] #theme-toggle::after{
+    content:'☀️';
+}
+html[data-theme='dark'] #theme-toggle::after{
+    content:'🌙';
+}
+
+/* Esconde qualquer texto visível interno do botão (a label permanece para leitores de tela) */
+#theme-toggle .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* End of file */
